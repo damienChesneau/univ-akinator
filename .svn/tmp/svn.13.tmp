@@ -1,0 +1,66 @@
+#include "bdd.h"
+#include <string.h>
+
+#define NB_MOY_QUESTION 20
+/*
+ * 
+ * Formated name : HEART
+ */
+/**
+ * Récupère une structure personnage
+ * @param path : chemin
+ * @param nbPersonnage : nombre de personnages
+ * @return : base de données
+ */
+Personnages HEART_new_personnages(char * path, int nbPersonnage);
+
+/**
+ * Récupère une structure de questions
+ * @param path : chemin
+ * @return : base de personnages
+ */
+Questions HEART_new_questions(char * path);
+
+/**
+ * Récupère la question la plus adapté dans la base de questions
+ * @param questions : base de questions
+ * @param personnages : base de personnages
+ * @param min_note : note minimal a avoir pour être pris en compte
+ * @param reponses : tableau des réponses de l'utilisateur
+ * @return : la meilleur question a poser
+ */
+char * HEART_best_question(Questions questions, Personnages personnages, int min_note,  int reponses[2][NB_MOY_QUESTION]);
+
+/**
+ * Met a jour la note des personnages dans la base de données
+ * @param personnages : base de personnages.
+ * @param value : valeur de la réponse donnée.
+ * @param index_question : index de la question posée.
+ */
+void HEART_update_db(Personnages personnages, int value, int index_question);
+
+/**
+ * Met a jour les réponses inconnues d'un personnage trouvé dans la base de données
+ * @param personnages : base de personnage
+ * @param nom : nom du personnage a mettre a jour
+ * @param reponses : reponses pour ce personnage
+ */
+void HEART_update_personnage(Personnages  personnages, char* nom,  int reponses[2][NB_MOY_QUESTION]);
+
+/** Pull path for acces to question file.*/
+void HEART_get_path_questions(char ** path);
+/** Pull path for acces to question file.*/
+void HEART_get_path_personnage(char ** path);
+/**
+ * Récupère le personnage possédant la meilleur note dans la base de données
+ * @param personnages : base de personnages
+ * @return 
+ */
+char * HEART_best_personnage(Personnages  personnages);
+
+/**
+ * Récupère les 10 meillieurs personnages.
+ * @param noms : liste des personnages
+ * @param personnages : base de personnage
+ */
+void HEART_best_ten_personnage(char * noms[10], Personnages personnages);

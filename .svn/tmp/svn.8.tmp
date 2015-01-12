@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "../headers/ihm.h"
+#include "../headers/heart.h"
+
+/*
+ * Main file the input of this program
+ */
+
+char * serie_of_querys(Questions * questions, Personnages * personages, int reponses[2][NB_MOY_QUESTION]);
+void querys(Questions * questions, Personnages * personages, int reponses[2][NB_MOY_QUESTION]);
+char * test =NULL;
+int main(int argc, char** argv) {
+    char path[80];
+    int reponses[2][NB_MOY_QUESTION];
+    int i;
+
+    for (i = 0; i < NB_MOY_QUESTION; i++) {
+        reponses[0][i] = -1;
+    }
+    Questions questions = NULL;
+    Personnages personages = NULL;
+
+    HEART_get_path_questions((char **) &path);
+    BDD_USER_load_questions(&questions, path);
+    HEART_get_path_personnage((char **) &path);
+    BDD_USER_load_personnages(&personages, path, NB_MOY_QUESTION);
+
+    IHM_demander_penser_personage();
+    querys(&questions, &personages, reponses);
+    IHM_close();
+    return (EXIT_SUCCESS);
+}
+
+void querys(Questions * questions, Personnages * personages, int reponses[2][NB_MOY_QUESTION]) {
+    char * pesrsonnage = NULL;
+    pesrsonnage = serie_of_querys(questions, personages, reponses);
+    printf("OK5 %s\n", test);
+    int resultat = 0;
+    pesrsonnage =test;
+    if (pesrsonnage != NULL) { /* It's throws error beacause personnage is NULL; :/ */
+        resultat = IHM_proposer_reponse(pesrsonnage, NULL);
+    }
+    if (resultat == 1) {
+        IHM_close();
+    } else if (resultat == 2) {
+        querys(questions, personages, reponses);
+    } else {
+        /** Oulalala gros souci :/ */
+    }
+}
+
+char * serie_of_querys(Questions * questions, Personnages * personages, int reponses[2][NB_MOY_QUESTION]) {
+    static int nb = 0;
+    char * best_q = HEART_best_question(*questions, *personages, 0, reponses);
+    /* BDD_print_question(*questions);*/
+    printf("q : %s\n", best_q);
+    /*printf("num question %d\n",nb);*/
+    if (best_q == NULL) {
+        char * quest = HEART_best_personnage(*personages);
+        test = quest;
+        printf("1 %s\n", quest);
+        return quest;
+    } else {
+        /* printf("OK2\n");*/
+        int resultat = IHM_poser_question_utilisateur(best_q); /*resultat == -1, is it normal????*/
+        /*printf("resultat ihm : %d\n", resultat);*/
+        reponses[1][nb] = resultat;
+        nb++;
+        HEART_update_db(*personages, resultat, reponses[0][nb - 1]);
+        if (resultat != -1) {
+            if (nb <= NB_MOY_QUESTION) {
+                serie_of_querys(questions, personages, reponses);
+            } else {
+                free(best_q);
+                char * d = NULL;
+                d = HEART_best_personnage(*personages); /* Propose a response*/
+                printf("2 %s\n", d);
+                test = d;
+                return d;
+            }
+        } else {
+            serie_of_querys(questions, personages, reponses);
+        }
+    }
+    return NULL;
+}

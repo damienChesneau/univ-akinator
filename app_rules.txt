@@ -1,0 +1,4 @@
+R1: Please préfix your user functions by header formated name.
+R2: Please specify test code.
+R3: Exclude from commit private.xml file.
+R4: Write your code comments in english.

@@ -1,0 +1,20 @@
+#include "bdd.h"
+#include <string.h>
+
+#define NB_MOY_QUESTION 20
+/*
+ * 
+ * Formated name : HEART
+ */
+
+Personnages HEART_new_personnages(char * path, int nbPersonnage);
+Questions HEART_new_questions(char * path);
+char * HEART_best_question(Questions questions, Personnages personnages, int min_note,  int reponses[2][NB_MOY_QUESTION]);
+void HEART_update_db(Personnages personnages, int value, int index_question);
+void HEART_update_personnage(Personnages personnages, char* nom,  int reponses[2][NB_MOY_QUESTION], int nbQuestions);
+/** Pull path for acces to question file.*/
+void HEART_get_path_questions(char ** path);
+/** Pull path for acces to question file.*/
+void HEART_get_path_personnage(char ** path);
+
+char * HEART_best_personnage(Personnages  personnages);

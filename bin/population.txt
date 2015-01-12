@@ -1,0 +1,24 @@
+Nicolas Borie
+5 1 4 1 5 5 5 4 5 5 3 5 1 0 0 0 -1
+Stefan Derrick
+5 1 5 5 4 4 2 5 5 1 5 5 5 3 5 0 -1
+Tinky Winky (teletubbies)
+0 4 5 0 3 4 1 5 0 0 0 0 0 0 0 0 -1
+Babar (le roi des elephants)
+2 2 5 4 5 4 1 5 5 5 5 1 0 0 0 0 -1
+Columbo
+4 1 5 4 4 5 2 5 5 1 0 0 0 0 0 0 -1
+Dora l’exploratrice
+5 5 5 4 4 5 1 4 1 0 0 0 0 0 0 0 -1
+Lucky Luke
+3 1 4 5 4 5 1 5 5 2 5 5 5 1 5 2 -1
+Mick Jagger
+2 1 5 5 5 5 5 4 5 5 1 0 0 0 0 0 -1
+Jacques Chirac
+5 1 5 4 5 4 5 1 5 5 5 5 5 3 1 0 -1
+Borat
+4 1 5 5 1 5 1 3 5 5 5 3 5 5 4 1 -1
+Damien Chesneau
+5 1 1 5 5 5 5 5 5 5 5 5 5 5 5 5 -1
+Dark Vador
+3 1 5 5 2 5 1 1 5 5 0 0 0 0 0 0 -1

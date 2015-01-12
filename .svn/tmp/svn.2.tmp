@@ -1,0 +1,90 @@
+#include "../headers/heart.h"
+/**
+ * Se fichier est le coeur de l'application les décisions et reflexions serons faites ici.
+ * @author Damien Chesneau <contact@damienchesneau.fr>
+ */
+
+int charToInt(char a);
+int index_of_max(int *tab, int size);
+
+/*
+ * Fonction qui renvoie la question de la base la plus apte a etre posé.
+ */
+char * HEART_best_question(Questions questions, Personnages personnages, int min_note, int** reponses) {
+    int values[6][questions->index + 1];
+    int res[questions->index + 1];
+    Personnages temp = personnages;
+    int i;
+    int j;
+
+    for (j = 0; j < questions->index + 1; j++) {
+        for (i = 0; i < 6; i++) {
+            values[i][j] = 0;
+        }
+        res[j] = 1;
+    }
+
+    while (temp != NULL) {
+        for (i = 0; i < questions->index + 1; i++) {
+            values[charToInt(temp->reponses[i])][i]++;
+        }
+        temp = temp->next;
+    }
+
+    for (i = 0; i < questions->index + 1; i++) {
+        for (j = 1; j < 6; j++) {
+            res[i] *= values[i][j] + 1;
+        }
+    }
+    printf("OK %s\n", BDD_USER_get_questions(questions, index_of_max(res, questions->index)));
+    return BDD_USER_get_questions(questions, index_of_max(res, questions->index));
+}
+
+Personnages HEART_new_personnages(char * path, int nbPersonnage) {
+    Personnages personnage;
+    BDD_USER_load_personnages(&personnage, path, nbPersonnage);
+    return personnage;
+}
+
+Questions HEART_new_questions(char * path) {
+    Questions questions;
+    BDD_USER_load_questions(&questions, path);
+    return questions;
+}
+
+void HEART_update_db(Personnages personnages, int value, int index_question) {
+
+}
+
+void HEART_update_personnage(Personnages personnages, char* nom, char** reponses, int nbQuestions) {
+
+}
+
+void HEART_get_path_questions(char ** path) {
+    strcpy((char *) path, BIN_PATH_STANDARD);
+    strcat((char *) path, QUESTIONS_NAME_STANDARD);
+}
+
+void HEART_get_path_personnage(char ** path) {
+    strcpy((char *) path, BIN_PATH_STANDARD);
+    strcat((char *) path, POPULATION_NAME_STANDARD);
+}
+
+int index_of_max(int *tab, int size) {
+    int i;
+    int res = 0;
+    for (i = 0; i < size; i++) {
+        if (tab[res] < tab[i])
+            res = i;
+    }
+    return i;
+}
+
+int charToInt(char a) {
+    return (int) a - 48;
+}
+
+char * HEART_best_personnage(Personnages * personnages) {
+    /* To update.*/
+    return (*personnages)->nom;
+}
