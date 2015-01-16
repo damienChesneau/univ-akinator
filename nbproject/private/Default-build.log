@@ -1,0 +1,2 @@
+gcc -c source/graph_ihm.c -o include/graph_ihm.o
+gcc source/heart.c -o akinator -Wall -ansi include/graph_ihm.o -lMLV
